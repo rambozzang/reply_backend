@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>온라인 문의</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .content {
+            padding: 40px 30px;
+            line-height: 1.6;
+            color: #333;
+        }
+        .content h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        .info-box {
+            background-color: #f8f9ff;
+            border-left: 4px solid #667eea;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .info-item {
+            margin: 10px 0;
+            display: flex;
+            align-items: flex-start;
+        }
+        .info-label {
+            font-weight: bold;
+            color: #667eea;
+            min-width: 80px;
+            margin-right: 10px;
+        }
+        .info-value {
+            flex: 1;
+        }
+        .content-box {
+            background-color: #f8f9ff;
+            border: 1px solid #e0e6ff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .footer {
+            background-color: #f8f9ff;
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+            color: #666;
+            border-top: 1px solid #e0e6ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>도베르만</h1>
+        </div>
+        <div class="content">
+            <h2>온라인 문의가 접수되었습니다</h2>
+            <p>새로운 온라인 문의가 접수되었습니다. 아래의 내용을 확인해 주세요.</p>
+
+            <div class="info-box">
+                <div class="info-item">
+                    <span class="info-label">이름:</span>
+                    <span class="info-value" th:text="${customerName}">고객명</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">이메일:</span>
+                    <span class="info-value" th:text="${customerEmail}">customer@email.com</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">연락처:</span>
+                    <span class="info-value" th:text="${customerPhone}">010-1234-5678</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">문의유형:</span>
+                    <span class="info-value" th:text="${inquiryType}">기술 지원</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">제목:</span>
+                    <span class="info-value" th:text="${subject}">문의 제목</span>
+                </div>
+            </div>
+
+            <h3 style="color: #667eea; margin-top: 30px;">문의 내용:</h3>
+            <div class="content-box" th:text="${content}">
+                문의 내용이 여기에 표시됩니다.
+            </div>
+
+            <p style="margin-top: 30px; color: #666; font-size: 14px;">
+                * 고객에게 빠른 시일 내에 답변을 드리시기 바랍니다.
+            </p>
+        </div>
+        <div class="footer">
+            <p>본 메일은 도베르만 온라인 문의 시스템에서 자동 발송된 메일입니다.</p>
+            <p>© 2024 도베르만. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
