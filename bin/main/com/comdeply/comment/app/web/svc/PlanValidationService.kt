@@ -1,6 +1,6 @@
 package com.comdeply.comment.app.web.svc
 
-import com.comdeply.comment.config.PlanLimits
+import com.comdeply.comment.utils.PlanLimits
 import com.comdeply.comment.dto.common.ValidationResult
 import com.comdeply.comment.entity.SubscriptionStatus
 import com.comdeply.comment.repository.CommentRepository
@@ -23,16 +23,11 @@ class PlanValidationService(
     /**
      * 관리자의 현재 플랜 조회
      */
-    fun getAdminPlan(adminId: Long): PlanLimits.Plan {
+    fun getAdminPlan(adminId: Long): com.comdeply.comment.app.web.entity.SubscriptionPlan {
         val subscription = subscriptionRepository.findByAdminIdAndStatus(adminId, SubscriptionStatus.ACTIVE)
-            ?: return PlanLimits.Plan.STARTER // 기본 플랜
+            ?: return com.comdeply.comment.app.web.entity.SubscriptionPlan.STARTER // 기본 플랜
 
-        return when (subscription.planName.uppercase()) {
-            "STARTER" -> PlanLimits.Plan.STARTER
-            "PRO" -> PlanLimits.Plan.PRO
-            "ENTERPRISE" -> PlanLimits.Plan.ENTERPRISE
-            else -> PlanLimits.Plan.STARTER
-        }
+        return subscription.plan
     }
 
     /**

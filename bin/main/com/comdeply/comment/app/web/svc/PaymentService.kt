@@ -196,7 +196,6 @@ class PaymentService(
             // 포트원 환불 요청
             val cancelRequest = com.comdeply.comment.portone.dto.PaymentCancelRequest(
                 imp_uid = payment.portoneTransactionId ?: "",
-                merchant_uid = paymentId,
                 amount = java.math.BigDecimal(payment.amount.toLong()),
                 reason = reason,
                 refund_holder = "", // TODO: 환불 계좌 정보
@@ -221,7 +220,7 @@ class PaymentService(
 
             RefundResponse(
                 success = cancelResponse.code == 0,
-                cancellationId = cancelResponse.response?.impUid,
+                cancellationId = cancelResponse.response?.get("imp_uid")?.asText(),
                 message = cancelResponse.message ?: "환불이 완료되었습니다"
             )
         } catch (e: Exception) {
